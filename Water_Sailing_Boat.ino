@@ -19,6 +19,8 @@
 NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE); 
 
 AF_DCMotor motor1(1, MOTOR12_1KHZ); 
+AF_DCMotor motor2(2, MOTOR12_1KHZ);
+
 Servo myservo;   
 
 boolean goesForward=false;
@@ -106,7 +108,8 @@ int readPing() {
 }
 
 void moveStop() {
-  motor1.run(RELEASE); 
+  motor1.run(RELEASE);
+  motor2.run(RELEASE); 
   } 
   
 void moveForward() {
@@ -114,10 +117,12 @@ void moveForward() {
  if(!goesForward)
   {
     goesForward=true;
-    motor1.run(FORWARD);           
+    motor1.run(FORWARD);  
+    motor2.run(FORWARD);         
    for (speedSet = 0; speedSet < MAX_SPEED; speedSet +=2) // slowly bring the speed up to avoid loading down the batteries too quickly
    {
     motor1.setSpeed(speedSet);
+    motor2.setSpeed(speedSet);
     delay(5);
    }
   }
@@ -125,22 +130,28 @@ void moveForward() {
 
 void moveBackward() {
     goesForward=false;
-    motor1.run(BACKWARD);      
+    motor1.run(BACKWARD);
+    motor2.run(BACKWARD);      
   for (speedSet = 0; speedSet < MAX_SPEED; speedSet +=2) // slowly bring the speed up to avoid loading down the batteries too quickly
   {
     motor1.setSpeed(speedSet);
+    motor2.setSpeed(speedSet);
     delay(5);
   }
 }  
 
 void turnRight() {
-  motor1.run(FORWARD);    
+  motor1.run(FORWARD);   
+  motor2.run(FORWARD); 
   delay(500);
-  motor1.run(FORWARD);           
+  motor1.run(FORWARD); 
+  motor2.run(FORWARD);          
 } 
  
 void turnLeft() {
-  motor1.run(BACKWARD);       
+  motor1.run(BACKWARD);
+  motor2.run(BACKWARD);       
   delay(500);
-  motor1.run(FORWARD);     
+  motor1.run(FORWARD); 
+  motor2.run(FORWARD);    
 }  
