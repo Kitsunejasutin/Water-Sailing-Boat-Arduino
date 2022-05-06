@@ -22,6 +22,7 @@ AF_DCMotor motor1(1, MOTOR12_1KHZ);
 AF_DCMotor motor2(2, MOTOR12_1KHZ);
 
 Servo myservo;   
+Servo steer;
 
 boolean goesForward=false;
 int distance = 100;
@@ -30,7 +31,9 @@ int speedSet = 0;
 void setup() {
 
   myservo.attach(10);  
-  myservo.write(115); 
+  myservo.write(90);
+  steer.attach(9);  
+  steer.write(90);  
   delay(2000);
   distance = readPing();
   delay(100);
@@ -40,6 +43,7 @@ void setup() {
   delay(100);
   distance = readPing();
   delay(100);
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -142,16 +146,34 @@ void moveBackward() {
 
 void turnRight() {
   motor1.run(FORWARD);   
-  motor2.run(FORWARD); 
-  delay(500);
-  motor1.run(FORWARD); 
-  motor2.run(FORWARD);          
+  motor2.run(FORWARD);
+  Serial.println("Turn Right");
+  int p; 
+  for(p=90;p<180;p++)
+  {
+    steer.write(p);
+    delay(100);
+  }
+  for(p=180;p>=90;p--)
+  {
+    steer.write(p);
+    delay(100);  
+  } 
 } 
  
 void turnLeft() {
   motor1.run(BACKWARD);
-  motor2.run(BACKWARD);       
-  delay(500);
-  motor1.run(FORWARD); 
-  motor2.run(FORWARD);    
+  motor2.run(BACKWARD);
+  Serial.println("Turn Left");
+  int p;         
+    for(p=90;p>0;p--)
+  {
+    steer.write(p);
+    delay(100);
+  }
+  for(p=0;p<90;p++)
+  {
+    steer.write(p);
+    delay(100);  
+  }         
 }  
