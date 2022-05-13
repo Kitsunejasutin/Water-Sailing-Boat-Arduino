@@ -20,6 +20,7 @@ NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE);
 
 AF_DCMotor motor1(1, MOTOR12_1KHZ); 
 AF_DCMotor motor2(2, MOTOR12_1KHZ);
+AF_DCMotor motor4(4, MOTOR34_1KHZ); 
 
 Servo myservo;   
 Servo steer;
