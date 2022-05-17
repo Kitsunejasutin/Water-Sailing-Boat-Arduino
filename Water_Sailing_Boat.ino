@@ -83,11 +83,11 @@ void loop() {
 
 int lookRight()
 {
-    myservo.write(50); 
+    myservo.write(10); 
     delay(500);
     int distance = readPing();
     delay(100);
-    myservo.write(115); 
+    myservo.write(90); 
     return distance;
 }
 
@@ -97,7 +97,7 @@ int lookLeft()
     delay(500);
     int distance = readPing();
     delay(100);
-    myservo.write(115); 
+    myservo.write(90); 
     return distance;
     delay(100);
 }
